@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Turismo El Maiten</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./effects.css" />
+    <link rel="stylesheet" href="./scripts/season-decor-generated.css" />
+  </head>
+  <body>
+    <a
+      class="whatsapp-float"
+      href="https://wa.me/5492945123456?text=Hola%2C%20quiero%20informaci%C3%B3n%20tur%C3%ADstica%20sobre%20El%20Mait%C3%A9n"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Contactar por WhatsApp"
+    >
+      <span>WhatsApp</span>
+    </a>
+
+    <header class="hero hero-indo" id="inicio">
+      <div class="hero-overlay"></div>
+
+      <div class="hero-brand-block">
+        <div class="hero-brand">
+          <img src="./assets/Logo%20Maiten.png" alt="Logo Turismo El Maitén" class="hero-logo" width="40" height="40" />
+        </div>
+        <span class="hero-brand-text">Turismo El Maitén</span>
+      </div>
+
+      <aside class="hero-social" aria-label="Redes sociales">
+        <span class="hero-social-line" aria-hidden="true"></span>
+        <a href="#" class="hero-social-link" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a href="#" class="hero-social-link" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M13.5 22v-9h3l.5-4h-3.5V7.5c0-1 .3-1.7 1.7-1.7H17V2.1C16.4 2 15.3 2 14 2c-2.7 0-4.5 1.6-4.5 4.7V9H6v4h3.5v9h4z" />
+          </svg>
+        </a>
+        <a href="#" class="hero-social-link" aria-label="WhatsApp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.52 3.48A11.83 11.83 0 0 0 12.03 0C5.4 0 .03 5.37.03 12c0 2.1.55 4.16 1.59 5.98L0 24l6.2-1.62A11.92 11.92 0 0 0 12.03 24c6.62 0 12-5.37 12-12 0-3.2-1.25-6.2-3.51-8.52zM12.03 21.96c-1.8 0-3.56-.48-5.09-1.4l-.36-.21-3.68.96.98-3.59-.24-.37a9.93 9.93 0 0 1-1.56-5.35c0-5.5 4.47-9.96 9.96-9.96 2.66 0 5.16 1.03 7.04 2.92a9.88 9.88 0 0 1 2.92 7.04c0 5.5-4.47 9.96-9.97 9.96zm5.46-7.46c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15s-.76.97-.94 1.17c-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47a8.94 8.94 0 0 1-1.66-2.06c-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37s-1.03 1-.99 2.43c.04 1.43 1.02 2.81 1.16 3 .15.2 2 3.1 4.9 4.22.69.3 1.23.48 1.64.62.69.22 1.31.19 1.8.12.55-.08 1.77-.72 2.03-1.42.25-.7.25-1.29.17-1.42-.08-.12-.28-.2-.58-.35z" />
+          </svg>
+        </a>
+      </aside>
+
+      <div class="hero-main">
+        <h1 class="hero-title">El Maitén</h1>
+        <div class="hero-about-label">
+          <span>Sobre</span>
+          <span class="hero-about-line"></span>
+        </div>
+        <p class="hero-lead">
+          Pueblo patagónico en el corazón de Chubut: historia, La Trochita y paisajes que se transforman en
+          cada estación. Un destino para recorrer con calma y volver a visitar.
+        </p>
+        <a href="#sobre-el-maiten" class="hero-cta">Explorar <span class="hero-cta-arrow" aria-hidden="true">→</span></a>
+      </div>
+
+      <nav class="hero-locations" aria-label="Atracciones destacadas">
+        <button type="button" class="hero-loc" data-hero-scene="0">
+          <svg class="hero-loc-pin" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M12 21s7-4.35 7-10a7 7 0 1 0-14 0c0 5.65 7 10 7 10z"
+              stroke="currentColor"
+              stroke-width="1.6"
+            />
+            <circle cx="12" cy="11" r="2" fill="currentColor" />
+          </svg>
+          El Maitén
+        </button>
+        <button type="button" class="hero-loc" data-hero-scene="1">Cañadón de los Ensueños</button>
+        <button type="button" class="hero-loc" data-hero-scene="2">Cerro de la Ventana</button>
+      </nav>
+
+      <div class="hero-photos">
+        <div class="hero-photos-head">
+          <span>Fotos</span>
+          <span class="hero-photos-dash"></span>
+        </div>
+        <div class="hero-photos-slider">
+          <button
+            type="button"
+            class="hero-photos-arrow hero-photos-arrow--prev"
+            id="hero-thumbs-prev"
+            aria-label="Ver el grupo anterior de cinco fotos"
+          >
+            <span aria-hidden="true">‹</span>
+          </button>
+          <div
+            class="hero-thumbs"
+            id="hero-thumbs-root"
+            role="list"
+            aria-label="Cinco fotos que rotan solas. Flechas para saltar de grupo. Clic en una para el fondo."
+          ></div>
+          <button
+            type="button"
+            class="hero-photos-arrow hero-photos-arrow--next"
+            id="hero-thumbs-next"
+            aria-label="Ver el grupo siguiente de cinco fotos"
+          >
+            <span aria-hidden="true">›</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-side-nav" data-side="0">
+        <div class="hero-side-nav-inner">
+          <button type="button" class="hero-side-item is-active" data-side="0">El Maitén</button>
+          <button type="button" class="hero-side-item" data-side="1">Patagonia</button>
+        </div>
+        <div class="hero-side-nav-slider" aria-hidden="true">
+          <div class="hero-side-nav-track"></div>
+          <div class="hero-side-nav-thumb"></div>
+        </div>
+      </div>
+
+      <p class="hero-copy">© 2026 Turismo El Maitén. Todos los derechos reservados.</p>
+    </header>
+
+    <main>
+      <section class="about section fx-section" id="sobre-el-maiten">
+        <div class="about-bg-slideshow" aria-hidden="true">
+          <span class="about-bg-slide is-active" data-about-slide="0"></span>
+          <span class="about-bg-slide" data-about-slide="1"></span>
+        </div>
+        <div class="container about-content">
+        <div class="about-header fx-stagger">
+          <span class="about-kicker fx-fade-up">Historia viva de la Patagonia</span>
+          <h2 class="fx-fade-up">Historia e identidad de El Maiten</h2>
+          <p class="about-intro fx-fade-up">
+            El Maiten no se cuenta solo en fechas: se siente en el viento, en la memoria de sus vias y en
+            la calma de un paisaje que abraza cada historia.
+          </p>
+        </div>
+        <div class="timeline-vertical">
+          <article class="timeline-item reveal-on-scroll">
+            <img src="./assets/El Maiten/El maiten1.jpg" alt="Arbol maitén en la region" />
+            <div class="timeline-content">
+              <span class="timeline-tag">Origen</span>
+              <h3>El nombre El Maiten</h3>
+              <p>
+                Su nombre nace del arbol nativo maiten, simbolo de abrigo y equilibrio para quienes
+                habitaron primero esta tierra.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal-on-scroll">
+            <img src="./assets/El Maiten/El Maiten 2.jpg" alt="Historia del pueblo de El Maiten" />
+            <div class="timeline-content">
+              <span class="timeline-tag">Primeros años</span>
+              <h3>Comunidades y territorio</h3>
+              <p>
+                Antes de los colonos, comunidades mapuches y tehuelches caminaron este territorio en dialogo
+                permanente con la naturaleza.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal-on-scroll">
+            <img src="./assets/El Maiten/El Maiten 11.jpg" alt="La Trochita en El Maiten" />
+            <div class="timeline-content">
+              <span class="timeline-tag">1922</span>
+              <h3>Llegada del ferrocarril</h3>
+              <p>
+                La construccion del ramal de La Trochita marco un antes y un despues: trabajo, encuentro y
+                crecimiento para toda la region.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal-on-scroll">
+            <img src="./assets/El Maiten/El Maiten 8.jpg" alt="Identidad actual de El Maiten" />
+            <div class="timeline-content">
+              <span class="timeline-tag">Hoy</span>
+              <h3>Legado vivo</h3>
+              <p>
+                Hoy, El Maiten conserva su identidad con orgullo: historia sobre rieles, paisajes vivos y
+                una calma que invita a volver.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal-on-scroll">
+            <img src="./assets/Cerro de la ventana/Cerro de la ventana.jpg" alt="Vista del Cerro de la Ventana" />
+            <div class="timeline-content">
+              <span class="timeline-tag">Atractivo natural</span>
+              <h3>Cerro de la Ventana</h3>
+              <p>
+                Un recorrido ideal para caminatas y miradores panoramicos. Combina aventura, aire puro y
+                postales unicas de la cordillera y el valle.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal-on-scroll">
+            <img src="./assets/Canadon ensuenos/Canadon ensuenos.jpg" alt="Cañadon de los Ensueños en El Maiten" />
+            <div class="timeline-content">
+              <span class="timeline-tag">Paisaje y tranquilidad</span>
+              <h3>Cañadon de los Ensueños</h3>
+              <p>
+                A pocos kilometros de El Maiten, este rincon invita a desconectar entre formaciones
+                rocosas, vegetacion autoctona y una calma que inspira.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal-on-scroll">
+            <img src="./assets/Vista del pueblo desde El cerro de la Cruz.jpg" alt="Vista del pueblo desde el Cerro de la Cruz" />
+            <div class="timeline-content">
+              <span class="timeline-tag">Identidad local</span>
+              <h3>La Grutita y Cerro de la Cruz</h3>
+              <p>
+                La Grutita es un espacio de recogimiento muy querido por la comunidad, y el Cerro de la
+                Cruz ofrece una vista panoramica del pueblo, el rio Chubut y sus alrededores.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal-on-scroll">
+            <img src="./assets/Otono/Otono%20Maiten.jpg" alt="El Maitén en otoño — Aldea Escolar Buenos Aires Chico" />
+            <div class="timeline-content">
+              <span class="timeline-tag">Circuito rural</span>
+              <h3>Aldea Escolar Buenos Aires Chico</h3>
+              <p>
+                Un entorno rural patagonico con historia, naturaleza y vida local. Perfecto para conocer
+                otra cara de la region y sumar experiencias autenticas.
+              </p>
+            </div>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section class="season section season-winter fx-section" id="invierno">
+        <div class="season-decor season-decor--snow" aria-hidden="true">
+          <span class="snow-layer snow-layer-1"></span>
+          <span class="snow-layer snow-layer-2"></span>
+          <span class="snow-layer snow-layer-3"></span>
+          <span class="snow-layer snow-layer-4"></span>
+          <span class="snow-layer snow-layer-5"></span>
+          <span class="snow-layer snow-layer-6"></span>
+        </div>
+        <div class="container season-layout">
+          <div class="season-text fx-stagger">
+            <h2 class="fx-fade-up">El Maiten en invierno</h2>
+            <p class="fx-fade-up">
+              El invierno cubre el paisaje de blanco y regala postales inolvidables. Caminatas, aire puro
+              y la calma de la nieve transforman cada rincon en una experiencia unica.
+            </p>
+            <p class="fx-fade-up">
+              Fotos de la carpeta Invierno en carrusel continuo, en sentido opuesto al de otoño.
+            </p>
+          </div>
+          <div class="carousel fx-fade-up fx-delay" data-direction="left" id="carousel-invierno"></div>
+        </div>
+      </section>
+
+      <section class="season section season-alt season-autumn fx-section" id="otono">
+        <div class="season-decor season-decor--leaves" aria-hidden="true">
+          <span class="leaf-layer leaf-layer-1"></span>
+          <span class="leaf-layer leaf-layer-2"></span>
+          <span class="leaf-layer leaf-layer-3"></span>
+          <span class="leaf-layer leaf-layer-4"></span>
+          <span class="leaf-layer leaf-layer-5"></span>
+          <span class="leaf-layer leaf-layer-6"></span>
+        </div>
+        <div class="container season-layout">
+          <div class="carousel fx-fade-up fx-delay" data-direction="right" id="carousel-otono"></div>
+          <div class="season-text fx-stagger">
+            <h2 class="fx-fade-up">El Maiten en otoño</h2>
+            <p class="fx-fade-up">
+              El otoño pinta el pueblo de dorados y rojizos: bosques, caminos y cielos que invitan a
+              caminar despacio y sacar fotos en cada esquina.
+            </p>
+            <p class="fx-fade-up">
+              Carrusel con las fotos de la carpeta Otono, moviéndose en sentido contrario al de invierno.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="attractions section container fx-section" id="atracciones">
+        <div class="fx-stagger">
+          <h2 class="fx-fade-up">Otras atracciones</h2>
+          <p class="attractions-intro fx-fade-up">
+            Postales unicas para descubrir caminos, miradores y rincones de naturaleza en El Maiten.
+          </p>
+        </div>
+        <div class="attractions-showcase fx-stagger">
+          <article class="attraction-card attraction-card--large fx-fade-up">
+            <img src="./assets/Cerro de la ventana/Cerro de la ventana.jpg" alt="Cerro de la Ventana" />
+            <div class="attraction-overlay">
+              <span>Mirador natural</span>
+              <h3>Cerro de la Ventana</h3>
+              <p>
+                Caminatas y panoramicas inolvidables, con un recorrido ideal para conectar con el paisaje.
+              </p>
+            </div>
+          </article>
+
+          <article class="attraction-card fx-fade-up">
+            <img src="./assets/Canadon ensuenos/Canadon ensuenos 2.jpg" alt="Cañadon de los Ensueños" />
+            <div class="attraction-overlay">
+              <span>Rincon de calma</span>
+              <h3>Cañadon de los Ensueños</h3>
+              <p>
+                Naturaleza, silencio y un escenario perfecto para caminar, contemplar y desconectar.
+              </p>
+            </div>
+          </article>
+
+          <article class="attraction-card fx-fade-up">
+            <img
+              src="./assets/Vista del pueblo desde El cerro de la Cruz.jpg"
+              alt="La Grutita y Cerro de la Cruz"
+            />
+            <div class="attraction-overlay">
+              <span>Identidad local</span>
+              <h3>La Grutita y Cerro de la Cruz</h3>
+              <p>
+                Un paseo con valor espiritual y una vista completa del pueblo, el rio y los cerros.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="events section fx-section" id="eventos">
+        <div class="events-emoji-field" aria-hidden="true">
+          <span class="events-emoji">🧉</span>
+          <span class="events-emoji">🧉</span>
+          <span class="events-emoji">🚂</span>
+          <span class="events-emoji">🚂</span>
+          <span class="events-emoji">🍁</span>
+          <span class="events-emoji">🍁</span>
+          <span class="events-emoji">🍂</span>
+          <span class="events-emoji">🍂</span>
+          <span class="events-emoji">🌸</span>
+          <span class="events-emoji">🌸</span>
+          <span class="events-emoji">🌲</span>
+          <span class="events-emoji">🌲</span>
+          <span class="events-emoji">☀️</span>
+          <span class="events-emoji">☀️</span>
+          <span class="events-emoji">🗻</span>
+          <span class="events-emoji">🗻</span>
+        </div>
+        <div class="container">
+          <header class="events-header fx-stagger">
+            <h2 class="fx-fade-up">Eventos y Festivales</h2>
+            <p class="events-lead fx-fade-up">
+              Dos propuestas emblemáticas del calendario maitenino. Consultá fechas, ubicación y entradas por
+              WhatsApp — como en un ticket para no perderte nada.
+            </p>
+          </header>
+
+          <div class="events-tickets">
+            <article class="event-ticket" aria-labelledby="evento-tren-titulo">
+              <div class="event-ticket__body">
+                <div class="event-ticket__visual">
+                  <img
+                    src="./assets/El%20Maiten/El%20Maiten%2011.jpg"
+                    alt="La Trochita y el tren a vapor en El Maitén"
+                    width="400"
+                    height="520"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="event-ticket__content">
+                  <span class="event-ticket__tag">Festival · Patagonia</span>
+                  <h3 id="evento-tren-titulo" class="event-ticket__title">Fiesta Nacional del Tren a Vapor</h3>
+                  <p class="event-ticket__desc">
+                    Encuentro con la historia viva del vapor, visitas guiadas, actividades en torno a La Trochita
+                    y el espíritu ferroviario que define al pueblo.
+                  </p>
+                  <div class="event-ticket__route" aria-hidden="true">
+                    <span>Estación</span>
+                    <span class="event-ticket__route-dot"></span>
+                    <span>Vapor</span>
+                    <span class="event-ticket__route-dot"></span>
+                    <span>Patrimonio</span>
+                  </div>
+                </div>
+              </div>
+              <div class="event-ticket__tear" aria-hidden="true">
+                <span class="event-ticket__notch event-ticket__notch--top"></span>
+                <span class="event-ticket__dash"></span>
+                <span class="event-ticket__notch event-ticket__notch--bottom"></span>
+              </div>
+              <aside class="event-ticket__stub" aria-label="Datos del evento y compra">
+                <div class="event-ticket__stub-inner">
+                  <dl class="event-ticket__meta">
+                    <div>
+                      <dt>Cuándo</dt>
+                      <dd>Calendario 2026 — confirmar fechas</dd>
+                    </div>
+                    <div>
+                      <dt>Dónde</dt>
+                      <dd>El Maitén, Chubut</dd>
+                    </div>
+                    <div>
+                      <dt>Entradas</dt>
+                      <dd>WhatsApp turismo</dd>
+                    </div>
+                  </dl>
+                  <a
+                    class="event-ticket__wpp"
+                    href="https://wa.me/5492945123456?text=Hola%2C%20quiero%20info%20sobre%20la%20Fiesta%20Nacional%20del%20Tren%20a%20Vapor%20en%20El%20Mait%C3%A9n."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Consultar por WhatsApp
+                  </a>
+                </div>
+                <div class="event-ticket__stub-photo" aria-hidden="true">
+                  <img src="./assets/El%20Maiten/El%20Maiten%208.jpg" alt="" loading="lazy" />
+                </div>
+                <p class="event-ticket__stub-code">EVT · TRN‑VAPOR‑MAI</p>
+              </aside>
+            </article>
+
+            <article class="event-ticket event-ticket--mate" aria-labelledby="evento-mate-titulo">
+              <div class="event-ticket__body">
+                <div class="event-ticket__visual">
+                  <img
+                    src="./assets/Otono/Otono%20maiten%202.jpg"
+                    alt="Paisaje y encuentro — Fiesta del Mate"
+                    width="400"
+                    height="520"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="event-ticket__content">
+                  <span class="event-ticket__tag">Encuentro regional</span>
+                  <h3 id="evento-mate-titulo" class="event-ticket__title">Fiesta Regional del Mate</h3>
+                  <p class="event-ticket__desc">
+                    Rituales, música, artesanos y el mate como símbolo de encuentro. Una celebración para vivir
+                    en comunidad y conocer sabores y tradiciones de la región.
+                  </p>
+                  <div class="event-ticket__route" aria-hidden="true">
+                    <span>Plaza</span>
+                    <span class="event-ticket__route-dot"></span>
+                    <span>Mate</span>
+                    <span class="event-ticket__route-dot"></span>
+                    <span>Cultura</span>
+                  </div>
+                </div>
+              </div>
+              <div class="event-ticket__tear" aria-hidden="true">
+                <span class="event-ticket__notch event-ticket__notch--top"></span>
+                <span class="event-ticket__dash"></span>
+                <span class="event-ticket__notch event-ticket__notch--bottom"></span>
+              </div>
+              <aside class="event-ticket__stub" aria-label="Datos del evento y compra">
+                <div class="event-ticket__stub-inner">
+                  <dl class="event-ticket__meta">
+                    <div>
+                      <dt>Cuándo</dt>
+                      <dd>Calendario 2026 — confirmar fechas</dd>
+                    </div>
+                    <div>
+                      <dt>Dónde</dt>
+                      <dd>El Maitén, Chubut</dd>
+                    </div>
+                    <div>
+                      <dt>Entradas</dt>
+                      <dd>WhatsApp turismo</dd>
+                    </div>
+                  </dl>
+                  <a
+                    class="event-ticket__wpp"
+                    href="https://wa.me/5492945123456?text=Hola%2C%20quiero%20info%20sobre%20la%20Fiesta%20Regional%20del%20Mate%20en%20El%20Mait%C3%A9n."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Consultar por WhatsApp
+                  </a>
+                </div>
+                <div class="event-ticket__stub-photo" aria-hidden="true">
+                  <img src="./assets/Otono/Otono%20Maiten.jpg" alt="" loading="lazy" />
+                </div>
+                <p class="event-ticket__stub-code">EVT · MATE‑REG‑MAI</p>
+              </aside>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact section contact--with-bg fx-section" id="contacto">
+        <div class="container contact-grid fx-stagger">
+          <div class="map-info fx-fade-up">
+            <h2>Contacto y ubicación</h2>
+            <iframe
+              title="Ubicacion de El Maiten en Google Maps"
+              src="https://www.google.com/maps?q=El%20Maiten%2C%20Chubut&output=embed"
+              loading="lazy"
+            ></iframe>
+            <div class="contact-data">
+              <p><strong>Dirección:</strong> El Maiten, Chubut, Patagonia Argentina</p>
+              <p><strong>Teléfono:</strong> +54 9 2945 12-3456</p>
+              <p><strong>Email:</strong> turismo@elmaiten.gob.ar</p>
+            </div>
+          </div>
+
+          <form class="contact-form fx-fade-up" id="wpp-form">
+            <div class="contact-form-header">
+              <h3>Consulta turística</h3>
+              <p class="contact-form-lead">
+                Completá el formulario y te respondemos por WhatsApp con información sobre El Maitén.
+              </p>
+            </div>
+
+            <div class="form-row form-row--2">
+              <div class="form-field">
+                <label for="nombre">Nombre <span class="req">*</span></label>
+                <input id="nombre" name="nombre" type="text" autocomplete="given-name" required placeholder="Tu nombre" />
+              </div>
+              <div class="form-field">
+                <label for="apellido">Apellido</label>
+                <input id="apellido" name="apellido" type="text" autocomplete="family-name" placeholder="Tu apellido" />
+              </div>
+            </div>
+
+            <div class="form-row form-row--2">
+              <div class="form-field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="correo@ejemplo.com" />
+              </div>
+              <div class="form-field">
+                <label for="telefono">Teléfono / WhatsApp</label>
+                <input
+                  id="telefono"
+                  name="telefono"
+                  type="tel"
+                  autocomplete="tel"
+                  placeholder="+54 9 ..."
+                />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="mensaje">Mensaje <span class="req">*</span></label>
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                rows="5"
+                required
+                placeholder="Contanos qué te gustaría saber o planear en El Maitén..."
+              ></textarea>
+            </div>
+
+            <p class="form-hint"><span class="req">*</span> Campos obligatorios</p>
+
+            <button type="submit" class="btn-wpp">Enviar por WhatsApp</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer fx-section">
+      <div class="container footer-content fx-fade-up">
+        <img src="./assets/Logo%20Maiten.png" alt="Logo de El Maiten" />
+        <div>
+          <h4>Turismo Municipalidad de El Maiten</h4>
+          <p>Patagonia Argentina</p>
+          <p>turismo@elmaiten.gob.ar | +54 9 2945 12-3456</p>
+        </div>
+        <nav>
+          <a href="#inicio">Inicio</a>
+          <a href="#sobre-el-maiten">Sobre El Maiten</a>
+          <a href="#atracciones">Atracciones</a>
+          <a href="#eventos">Eventos</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

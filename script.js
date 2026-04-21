@@ -1,0 +1,352 @@
+const inviernoImages = [
+  "./assets/Invierno/Invierno Maiten.jpg",
+  "./assets/Invierno/Invierno Maiten 2.jpg",
+  "./assets/Invierno/Invierno maiten 3.jpg",
+  "./assets/Invierno/Invierno Maiten 4.jpg",
+];
+
+const otonoImages = [
+  "./assets/Otono/Otono Maiten.jpg",
+  "./assets/Otono/Otono maiten 2.jpg",
+  "./assets/Otono/Otono maiten 3.jpg",
+  "./assets/Otono/Otono maiten 4.jpg",
+];
+
+const heroImages = [
+  "./assets/El Maiten/El Maiten.jpg",
+  "./assets/El Maiten/El maiten1.jpg",
+  "./assets/El Maiten/El Maiten 2.jpg",
+  "./assets/El Maiten/El Maiten 3.jpg",
+  "./assets/El Maiten/El Maiten 4.jpg",
+  "./assets/El Maiten/El Maiten 5.jpg",
+  "./assets/El Maiten/El Maiten 6.jpg",
+  "./assets/El Maiten/El Maiten 7.jpg",
+  "./assets/El Maiten/El Maiten 8.jpg",
+  "./assets/El Maiten/El Maiten 9.jpg",
+  "./assets/El Maiten/El Maiten 10.jpg",
+  "./assets/El Maiten/El Maiten 11.jpg",
+  "./assets/El Maiten/El Maiten 12.jpg",
+  "./assets/El Maiten/El maiten 13.jpg",
+  "./assets/El Maiten/El maiten 14.jpg",
+];
+
+/** Galería del hero: El Maitén + vistas del pueblo + invierno + otoño (miniaturas que rotan). */
+const vistaPuebloImages = [
+  "./assets/Vista del pueblo desde El cerro de la Cruz.jpg",
+  "./assets/Vista del pueblo desde El cerro de la Cruz 2.jpg",
+];
+
+const heroThumbGallery = [
+  ...heroImages,
+  ...vistaPuebloImages,
+  ...inviernoImages,
+  ...otonoImages,
+];
+
+function buildCarousel(containerId, images, prefix) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const track = document.createElement("div");
+  track.className = "carousel-track";
+
+  const duplicated = [...images, ...images];
+  duplicated.forEach((src, index) => {
+    const item = document.createElement("figure");
+    item.className = "carousel-item";
+
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = `${prefix} ${index % images.length + 1}`;
+
+    item.appendChild(img);
+    track.appendChild(item);
+  });
+
+  container.appendChild(track);
+}
+
+buildCarousel("carousel-invierno", inviernoImages, "El Maiten invierno");
+buildCarousel("carousel-otono", otonoImages, "El Maiten en otoño");
+
+/** Cinco miniaturas; rotan solas (de a una) y las flechas saltan de 5 en 5 en `heroThumbGallery`. */
+const HERO_THUMB_SLOTS = 5;
+const HERO_THUMB_ARROW_STEP = 5;
+let heroThumbOffset = 0;
+let heroThumbRotateTimer = null;
+
+function ensureHeroThumbSlots() {
+  const root = document.getElementById("hero-thumbs-root");
+  if (!root) return null;
+  const n = root.querySelectorAll(".hero-thumb").length;
+  if (n === HERO_THUMB_SLOTS) return root;
+  root.innerHTML = "";
+  for (let s = 0; s < HERO_THUMB_SLOTS; s++) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "hero-thumb";
+    btn.dataset.slot = String(s);
+    const img = document.createElement("img");
+    img.alt = "";
+    btn.appendChild(img);
+    root.appendChild(btn);
+  }
+  return root;
+}
+
+function shiftHeroThumbs(delta) {
+  const n = heroThumbGallery.length;
+  if (n === 0) return;
+  heroThumbOffset = ((heroThumbOffset + delta) % n + n) % n;
+  const root = document.getElementById("hero-thumbs-root");
+  if (root) {
+    root.querySelectorAll(".hero-thumb.is-active").forEach((b) => b.classList.remove("is-active"));
+  }
+  renderHeroThumbStrip();
+}
+
+function renderHeroThumbStrip() {
+  const root = ensureHeroThumbSlots();
+  if (!root || heroThumbGallery.length === 0) return;
+  const total = heroThumbGallery.length;
+  root.querySelectorAll(".hero-thumb").forEach((btn, slot) => {
+    const globalIndex = (heroThumbOffset + slot) % total;
+    const src = heroThumbGallery[globalIndex];
+    btn.dataset.heroBg = src;
+    btn.dataset.heroIndex = String(globalIndex);
+    const img = btn.querySelector("img");
+    if (img) {
+      img.src = src;
+      img.alt = `Galería ${globalIndex + 1} de ${total}`;
+    }
+    btn.setAttribute("aria-label", `Foto ${globalIndex + 1} de ${total} — Turismo El Maitén`);
+  });
+
+  const prev = document.getElementById("hero-thumbs-prev");
+  const next = document.getElementById("hero-thumbs-next");
+  const hideArrows = total <= HERO_THUMB_SLOTS;
+  if (prev) prev.hidden = hideArrows;
+  if (next) next.hidden = hideArrows;
+}
+
+function startHeroThumbRotation() {
+  const slider = document.querySelector(".hero-photos-slider");
+  if (!slider || heroThumbGallery.length <= HERO_THUMB_SLOTS) return;
+
+  const prefersReduced =
+    typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) return;
+
+  const tick = () => {
+    shiftHeroThumbs(1);
+  };
+
+  heroThumbRotateTimer = window.setInterval(tick, 5000);
+
+  const pause = () => {
+    if (heroThumbRotateTimer) {
+      window.clearInterval(heroThumbRotateTimer);
+      heroThumbRotateTimer = null;
+    }
+  };
+  const resume = () => {
+    if (heroThumbRotateTimer) return;
+    heroThumbRotateTimer = window.setInterval(tick, 5000);
+  };
+
+  slider.addEventListener("mouseenter", pause);
+  slider.addEventListener("mouseleave", resume);
+}
+
+function setupHeroThumbArrows() {
+  const prev = document.getElementById("hero-thumbs-prev");
+  const next = document.getElementById("hero-thumbs-next");
+  if (!prev || !next) return;
+
+  prev.addEventListener("click", () => {
+    shiftHeroThumbs(-HERO_THUMB_ARROW_STEP);
+  });
+  next.addEventListener("click", () => {
+    shiftHeroThumbs(HERO_THUMB_ARROW_STEP);
+  });
+}
+
+renderHeroThumbStrip();
+setupHeroThumbArrows();
+startHeroThumbRotation();
+
+const heroGradient = "linear-gradient(rgba(12, 10, 8, 0.55), rgba(12, 10, 8, 0.45))";
+
+/** Fondo del hero al cargar (antes de elegir otra escena o miniatura). */
+const DEFAULT_HERO_BG = "./assets/Otono/Otono maiten 3.jpg";
+
+/** Imagen de fondo por cada botón de atracción (El Maitén, Cañadón, Cerro). */
+const heroSceneImages = [
+  "./assets/El Maiten/El Maiten.jpg",
+  "./assets/Canadon ensuenos/Canadon ensuenos.jpg",
+  "./assets/Cerro de la ventana/Cerro de la ventana.jpg",
+];
+
+function applyHeroBackground(url) {
+  const hero = document.querySelector(".hero");
+  if (!hero || !url) return;
+  let path = String(url).trim();
+  try {
+    path = decodeURIComponent(path);
+  } catch {
+    /* usar path tal cual */
+  }
+  const safePath = encodeURI(path);
+  hero.style.backgroundImage = `${heroGradient}, url("${safePath}")`;
+}
+
+function setupHeroBackground() {
+  const hero = document.querySelector(".hero");
+  if (!hero) return;
+
+  const sceneButtons = document.querySelectorAll("[data-hero-scene]");
+  const thumbsRoot = document.getElementById("hero-thumbs-root");
+
+  function clearSceneActive() {
+    sceneButtons.forEach((b) => b.classList.remove("is-active"));
+  }
+
+  function clearThumbActive() {
+    if (!thumbsRoot) return;
+    thumbsRoot.querySelectorAll(".hero-thumb").forEach((b) => b.classList.remove("is-active"));
+  }
+
+  sceneButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const i = parseInt(btn.getAttribute("data-hero-scene"), 10);
+      const path = heroSceneImages[i];
+      if (!path) return;
+      sceneButtons.forEach((b) => b.classList.toggle("is-active", b === btn));
+      clearThumbActive();
+      applyHeroBackground(path);
+    });
+  });
+
+  if (thumbsRoot) {
+    thumbsRoot.addEventListener("click", (e) => {
+      const btn = e.target.closest(".hero-thumb");
+      if (!btn || !thumbsRoot.contains(btn)) return;
+      const path = btn.dataset.heroBg || "";
+      if (!path) return;
+      applyHeroBackground(path);
+      thumbsRoot.querySelectorAll(".hero-thumb").forEach((b) => b.classList.toggle("is-active", b === btn));
+      clearSceneActive();
+    });
+  }
+
+  applyHeroBackground(DEFAULT_HERO_BG);
+
+  const sideNav = document.querySelector(".hero-side-nav");
+  document.querySelectorAll(".hero-side-item").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const side = btn.getAttribute("data-side");
+      if (sideNav && side) sideNav.setAttribute("data-side", side);
+      document.querySelectorAll(".hero-side-item").forEach((b) => b.classList.toggle("is-active", b === btn));
+    });
+  });
+}
+
+setupHeroBackground();
+
+function setupAboutBackgroundSlideshow() {
+  const slides = document.querySelectorAll(".about-bg-slide");
+  if (slides.length < 2) return;
+
+  let activeIndex = 0;
+
+  setInterval(() => {
+    slides[activeIndex].classList.remove("is-active");
+    activeIndex = (activeIndex + 1) % slides.length;
+    slides[activeIndex].classList.add("is-active");
+  }, 7000);
+}
+
+setupAboutBackgroundSlideshow();
+
+function setupScrollReveal() {
+  const elements = document.querySelectorAll(".timeline-item.reveal-on-scroll");
+  if (!elements.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        obs.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px -6% 0px",
+    }
+  );
+
+  elements.forEach((el) => observer.observe(el));
+}
+
+setupScrollReveal();
+
+/** Entrada al scroll: añadí .fx-section + .fx-fade-up en el HTML (ver effects.css). */
+function setupFxSections() {
+  const sections = document.querySelectorAll(".fx-section");
+  if (!sections.length) return;
+
+  const prefersReduced =
+    typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) {
+    sections.forEach((el) => el.classList.add("fx-inview"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("fx-inview");
+        obs.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.08, rootMargin: "0px 0px -6% 0px" }
+  );
+
+  sections.forEach((el) => observer.observe(el));
+}
+
+setupFxSections();
+
+const wppForm = document.getElementById("wpp-form");
+
+if (wppForm) {
+  wppForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const nombre = document.getElementById("nombre")?.value?.trim() || "";
+    const apellido = document.getElementById("apellido")?.value?.trim() || "";
+    const email = document.getElementById("email")?.value?.trim() || "";
+    const telefono = document.getElementById("telefono")?.value?.trim() || "";
+    const mensaje = document.getElementById("mensaje")?.value?.trim() || "";
+
+    const nombreCompleto = [nombre, apellido].filter(Boolean).join(" ");
+
+    const lineas = [
+      "Hola, quiero información turística sobre El Maitén.",
+      "",
+      `Nombre: ${nombreCompleto || nombre || "(sin nombre)"}`,
+      email ? `Email: ${email}` : null,
+      telefono ? `Tel / WhatsApp: ${telefono}` : null,
+      "",
+      "Mensaje:",
+      mensaje,
+    ].filter((line) => line !== null);
+
+    const text = lineas.join("\n");
+    const wppUrl = `https://wa.me/5492945123456?text=${encodeURIComponent(text)}`;
+
+    window.open(wppUrl, "_blank", "noopener,noreferrer");
+  });
+}

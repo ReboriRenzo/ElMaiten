@@ -1,0 +1,386 @@
+/**
+ * Efectos de interfaz reutilizables (scroll, hover, foco).
+ * Nuevas secciones: añadí .fx-section al <section> y .fx-fade-up a bloques internos;
+ * opcional .fx-stagger en el contenedor padre para escalonar hijos .fx-fade-up.
+ */
+
+:root {
+  --fx-duration: 0.75s;
+  --fx-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --fx-stagger: 70ms;
+}
+
+/* ---------- Secciones: solo los bloques .fx-fade-up animan (los fondos siguen visibles) ---------- */
+.fx-section .fx-fade-up {
+  transition:
+    opacity 0.65s var(--fx-ease),
+    transform 0.65s var(--fx-ease);
+}
+
+.fx-section:not(.fx-inview) .fx-fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.fx-section.fx-inview .fx-fade-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fx-section.fx-inview .fx-stagger .fx-fade-up:nth-child(1) {
+  transition-delay: calc(var(--fx-stagger) * 0);
+}
+.fx-section.fx-inview .fx-stagger .fx-fade-up:nth-child(2) {
+  transition-delay: calc(var(--fx-stagger) * 1);
+}
+.fx-section.fx-inview .fx-stagger .fx-fade-up:nth-child(3) {
+  transition-delay: calc(var(--fx-stagger) * 2);
+}
+.fx-section.fx-inview .fx-stagger .fx-fade-up:nth-child(4) {
+  transition-delay: calc(var(--fx-stagger) * 3);
+}
+.fx-section.fx-inview .fx-stagger .fx-fade-up:nth-child(5) {
+  transition-delay: calc(var(--fx-stagger) * 4);
+}
+.fx-section.fx-inview .fx-stagger .fx-fade-up:nth-child(6) {
+  transition-delay: calc(var(--fx-stagger) * 5);
+}
+
+/* Carruseles / bloques grandes: un poco más tarde */
+.fx-section.fx-inview .fx-fade-up.fx-delay {
+  transition-delay: calc(var(--fx-stagger) * 2);
+}
+
+/* ---------- Redes en el hero ---------- */
+.hero-social-link {
+  transition:
+    transform 0.25s var(--fx-ease),
+    color 0.2s ease;
+}
+
+.hero-social-link:hover {
+  transform: scale(1.12);
+}
+
+/* ---------- Tickets de eventos ---------- */
+.event-ticket {
+  transition:
+    transform 0.3s var(--fx-ease),
+    box-shadow 0.3s ease;
+}
+
+.event-ticket:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 56px rgba(0, 0, 0, 0.14), 0 1px 0 rgba(255, 255, 255, 0.65) inset;
+}
+
+/* ---------- Hero: entrada al cargar (todo el inicio, desde los costados) ---------- */
+@keyframes hero-enter-from-left {
+  0% {
+    opacity: 0;
+    transform: translate3d(-2.75rem, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hero-enter-from-right {
+  0% {
+    opacity: 0;
+    transform: translate3d(2.75rem, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Mantiene translateY(-50%) del layout */
+@keyframes hero-enter-social-from-left {
+  0% {
+    opacity: 0;
+    transform: translate3d(-2.75rem, -50%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+@keyframes hero-enter-side-nav-from-right {
+  0% {
+    opacity: 0;
+    transform: translate3d(2.75rem, -50%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+/* Mantiene translateX(-50%) centrado en el pie */
+@keyframes hero-enter-copy {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(1.35rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes hero-enter-copy-mobile {
+  0% {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero .hero-brand-block {
+  animation: hero-enter-from-left 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.04s both;
+}
+
+.hero .hero-social {
+  animation: hero-enter-social-from-left 0.88s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+.hero-main .hero-title {
+  animation: hero-enter-from-left 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.hero-main .hero-about-label {
+  animation: hero-enter-from-left 0.88s cubic-bezier(0.22, 1, 0.36, 1) 0.32s both;
+}
+
+.hero-main .hero-lead {
+  animation: hero-enter-from-left 0.88s cubic-bezier(0.22, 1, 0.36, 1) 0.42s both;
+}
+
+.hero-main .hero-cta {
+  animation: hero-enter-from-left 0.82s cubic-bezier(0.22, 1, 0.36, 1) 0.52s both;
+}
+
+.hero .hero-locations {
+  animation: hero-enter-from-left 0.88s cubic-bezier(0.22, 1, 0.36, 1) 0.62s both;
+}
+
+.hero .hero-photos {
+  animation: hero-enter-from-right 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.36s both;
+}
+
+.hero .hero-side-nav {
+  animation: hero-enter-side-nav-from-right 0.88s cubic-bezier(0.22, 1, 0.36, 1) 0.48s both;
+}
+
+.hero .hero-copy {
+  animation: hero-enter-copy 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.72s both;
+}
+
+@media (max-width: 980px) {
+  .hero .hero-copy {
+    animation: hero-enter-copy-mobile 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.72s both;
+  }
+}
+
+/* ---------- CTA hero: brillo en hover ---------- */
+.hero-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 45%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.55s var(--fx-ease);
+  pointer-events: none;
+}
+
+.hero-cta:hover::after {
+  transform: translateX(120%);
+}
+
+/* ---------- Tarjetas de atracciones: anillo verde al hover ---------- */
+.attraction-card:hover {
+  box-shadow:
+    0 22px 50px rgba(0, 0, 0, 0.16),
+    0 0 0 1px rgba(79, 107, 80, 0.35);
+}
+
+/* ---------- Botón WhatsApp del formulario ---------- */
+.btn-wpp {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.btn-wpp::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(
+    90deg,
+    #25d366,
+    #4ae095,
+    #25d366,
+    #128c7e
+  );
+  background-size: 300% 100%;
+  animation: fx-shimmer 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.btn-wpp:hover::before {
+  opacity: 0.35;
+}
+
+
+@keyframes fx-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.btn-wpp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.35);
+  background: linear-gradient(135deg, #27d968 0%, #138a7d 100%);
+}
+
+/* ---------- Inputs: foco con “glow” suave ---------- */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: rgba(79, 107, 80, 0.55);
+  box-shadow:
+    0 0 0 3px rgba(79, 107, 80, 0.18),
+    0 4px 14px rgba(0, 0, 0, 0.06);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+/* ---------- WhatsApp flotante: pulso ---------- */
+.whatsapp-float {
+  animation: fx-pulse-soft 2.8s ease-in-out infinite;
+}
+
+@keyframes fx-pulse-soft {
+  0%,
+  100% {
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+  }
+  50% {
+    box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5);
+  }
+}
+
+/* ---------- Enlaces del footer ---------- */
+.footer a {
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer a:hover {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+/* ---------- Reducción de movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --fx-duration: 0.01ms;
+    --fx-stagger: 0ms;
+  }
+
+  .fx-section .fx-fade-up,
+  .fx-section.fx-inview .fx-fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .hero-cta::after,
+  .btn-wpp::before {
+    animation: none !important;
+    transform: none !important;
+    opacity: 0 !important;
+  }
+
+  .whatsapp-float {
+    animation: none;
+  }
+
+  .hero .hero-brand-block,
+  .hero .hero-social,
+  .hero-main .hero-title,
+  .hero-main .hero-about-label,
+  .hero-main .hero-lead,
+  .hero-main .hero-cta,
+  .hero .hero-locations,
+  .hero .hero-photos,
+  .hero .hero-side-nav {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero .hero-social {
+    transform: translateY(-50%) !important;
+  }
+
+  .hero .hero-side-nav {
+    transform: translateY(-50%) !important;
+  }
+
+  .hero .hero-copy {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: translateX(-50%) !important;
+  }
+
+  @media (max-width: 980px) {
+    .hero .hero-copy {
+      transform: none !important;
+    }
+  }
+
+  .hero-social-link:hover {
+    transform: none;
+  }
+
+  .event-ticket:hover {
+    transform: none;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12), 0 1px 0 rgba(255, 255, 255, 0.65) inset;
+  }
+
+  .events-emoji {
+    animation: none !important;
+    transform: none !important;
+    opacity: 0.22 !important;
+  }
+}
