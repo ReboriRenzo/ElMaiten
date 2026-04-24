@@ -36,11 +36,15 @@ const vistaPuebloImages = [
   "./assets/Vista del pueblo desde El cerro de la Cruz 2.jpg",
 ];
 
+/** Fiesta Nacional del Tren a Vapor — fondo con recorte mobile dedicado */
+const heroEventoTrenVapor = "./assets/Eventos/Tren a vapor.jpg";
+
 const heroThumbGallery = [
   ...heroImages,
   ...vistaPuebloImages,
   ...inviernoImages,
   ...otonoImages,
+  heroEventoTrenVapor,
 ];
 
 function buildCarousel(containerId, images, prefix) {
@@ -198,6 +202,11 @@ function applyHeroBackground(url) {
   }
   const safePath = encodeURI(path);
   hero.style.backgroundImage = `${heroGradient}, url("${safePath}")`;
+
+  const pathNorm = path.replace(/\\/g, "/").toLowerCase();
+  const isTrainFestival =
+    pathNorm.includes("eventos") && pathNorm.includes("tren") && pathNorm.includes("vapor");
+  hero.classList.toggle("hero-bg--train-event", isTrainFestival);
 }
 
 function setupHeroBackground() {
@@ -319,6 +328,70 @@ function setupFxSections() {
 
 setupFxSections();
 
+/**
+ * Otras atracciones: cada tarjeta recorre su carpeta de fotos cada 4s.
+ * Solo usa imágenes que realmente cargan (evita rutas rotas).
+ */
+function setupAttractionsSlideshows() {
+  const cards = document.querySelectorAll(".attractions-showcase .attraction-card");
+  if (!cards.length) return;
+
+  const prefersReduced =
+    typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) return;
+
+  const candidateGalleries = [
+    [
+      "./assets/Cerro de la ventana/Cerro de la ventana.jpg",
+      "./assets/Cerro de la ventana/Cerro de la ventana 2.jpg",
+      "./assets/Cerro de la ventana/Cerro de la ventana 3.jpg",
+      "./assets/Cerro de la ventana/Cerro de la ventana 4.jpg",
+    ],
+    [
+      "./assets/Canadon ensuenos/Canadon ensuenos.jpg",
+      "./assets/Canadon ensuenos/Canadon ensuenos 2.jpg",
+      "./assets/Canadon ensuenos/Canadon ensuenos 3.jpg",
+      "./assets/Canadon ensuenos/Canon de los ensuenos.jpg",
+      "./assets/Canadon ensuenos/Canon de los ensuenos 2.jpg",
+    ],
+    [
+      "./assets/Vista del pueblo desde El cerro de la Cruz.jpg",
+      "./assets/Vista del pueblo desde El cerro de la Cruz 2.jpg",
+      "./assets/Vista del pueblo desde El cerro de la Cruz 3.jpg",
+    ],
+  ];
+
+  const checkImage = (src) =>
+    new Promise((resolve) => {
+      const probe = new Image();
+      probe.onload = () => resolve(src);
+      probe.onerror = () => resolve("");
+      probe.src = src;
+    });
+
+  cards.forEach(async (card, index) => {
+    const img = card.querySelector("img");
+    if (!img) return;
+
+    const candidates = candidateGalleries[index] || [img.getAttribute("src") || ""];
+    const checked = await Promise.all(candidates.map((src) => checkImage(src)));
+    const gallery = checked.filter(Boolean);
+    if (gallery.length <= 1) return;
+
+    let current = 0;
+    window.setInterval(() => {
+      current = (current + 1) % gallery.length;
+      img.classList.add("is-fading");
+      window.setTimeout(() => {
+        img.src = gallery[current];
+        img.classList.remove("is-fading");
+      }, 180);
+    }, 4000);
+  });
+}
+
+setupAttractionsSlideshows();
+
 const wppForm = document.getElementById("wpp-form");
 
 if (wppForm) {
@@ -334,18 +407,21 @@ if (wppForm) {
     const nombreCompleto = [nombre, apellido].filter(Boolean).join(" ");
 
     const lineas = [
-      "Hola, quiero información turística sobre El Maitén.",
+      "Hola equipo de Turismo El Maiten 👋",
+      "Estoy con muchas ganas de conocer El Maiten y me encantaria que me ayuden a planificar una experiencia inolvidable ✨",
       "",
       `Nombre: ${nombreCompleto || nombre || "(sin nombre)"}`,
       email ? `Email: ${email}` : null,
       telefono ? `Tel / WhatsApp: ${telefono}` : null,
       "",
-      "Mensaje:",
+      "Consulta:",
       mensaje,
+      "",
+      "Muchas gracias por su tiempo y buena onda. Quedo atento/a para coordinar mi viaje 🏞️",
     ].filter((line) => line !== null);
 
     const text = lineas.join("\n");
-    const wppUrl = `https://wa.me/5492945123456?text=${encodeURIComponent(text)}`;
+    const wppUrl = `https://wa.me/5492945691741?text=${encodeURIComponent(text)}`;
 
     window.open(wppUrl, "_blank", "noopener,noreferrer");
   });
