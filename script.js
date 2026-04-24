@@ -328,8 +328,41 @@ function setupFxSections() {
 
 setupFxSections();
 
+function setupAttractionsBackgroundCycle() {
+  const section = document.getElementById("atracciones");
+  if (!section) return;
+
+  const images = [
+    "./assets/Actividades/Kayak/1.jpeg",
+    "./assets/Actividades/Caballos/WhatsApp Image 2026-04-24 at 3.44.32 PM (1).jpeg",
+    "./assets/Actividades/Aero Club/image.png",
+    "./assets/Actividades/22 diciembre/1.jpeg",
+  ];
+  if (!images.length) return;
+
+  const prefersReduced =
+    typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const applySectionBg = (src) => {
+    if (!src) return;
+    const safePath = encodeURI(src);
+    section.style.setProperty("--attractions-bg", `url("${safePath}")`);
+  };
+
+  let index = 0;
+  applySectionBg(images[index]);
+  if (prefersReduced || images.length < 2) return;
+
+  window.setInterval(() => {
+    index = (index + 1) % images.length;
+    applySectionBg(images[index]);
+  }, 7000);
+}
+
+setupAttractionsBackgroundCycle();
+
 /**
- * Otras atracciones: cada tarjeta recorre su carpeta de fotos cada 4s.
+ * Otras atracciones/actividades: cada tarjeta recorre su carpeta de fotos cada 4s.
  * Solo usa imágenes que realmente cargan (evita rutas rotas).
  */
 function setupAttractionsSlideshows() {
@@ -340,26 +373,39 @@ function setupAttractionsSlideshows() {
     typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (prefersReduced) return;
 
-  const candidateGalleries = [
-    [
+  const candidateGalleries = {
+    cerro: [
       "./assets/Cerro de la ventana/Cerro de la ventana.jpg",
       "./assets/Cerro de la ventana/Cerro de la ventana 2.jpg",
       "./assets/Cerro de la ventana/Cerro de la ventana 3.jpg",
       "./assets/Cerro de la ventana/Cerro de la ventana 4.jpg",
     ],
-    [
+    canadon: [
       "./assets/Canadon ensuenos/Canadon ensuenos.jpg",
       "./assets/Canadon ensuenos/Canadon ensuenos 2.jpg",
       "./assets/Canadon ensuenos/Canadon ensuenos 3.jpg",
       "./assets/Canadon ensuenos/Canon de los ensuenos.jpg",
       "./assets/Canadon ensuenos/Canon de los ensuenos 2.jpg",
     ],
-    [
+    grutita: [
       "./assets/Vista del pueblo desde El cerro de la Cruz.jpg",
       "./assets/Vista del pueblo desde El cerro de la Cruz 2.jpg",
       "./assets/Vista del pueblo desde El cerro de la Cruz 3.jpg",
     ],
-  ];
+    aeroclub: ["./assets/Actividades/Aero Club/image.png"],
+    kayak: [
+      "./assets/Actividades/Kayak/1.jpeg",
+      "./assets/Actividades/Kayak/2.jpeg",
+    ],
+    caballos: [
+      "./assets/Actividades/Caballos/WhatsApp Image 2026-04-24 at 3.44.32 PM.jpeg",
+      "./assets/Actividades/Caballos/WhatsApp Image 2026-04-24 at 3.44.32 PM (1).jpeg",
+    ],
+    raftraining: [
+      "./assets/Actividades/R.A.F training.png",
+      "./assets/Actividades/R.A.F training2.png",
+    ],
+  };
 
   const checkImage = (src) =>
     new Promise((resolve) => {
@@ -369,11 +415,12 @@ function setupAttractionsSlideshows() {
       probe.src = src;
     });
 
-  cards.forEach(async (card, index) => {
+  cards.forEach(async (card) => {
     const img = card.querySelector("img");
     if (!img) return;
 
-    const candidates = candidateGalleries[index] || [img.getAttribute("src") || ""];
+    const key = card.getAttribute("data-gallery") || "";
+    const candidates = candidateGalleries[key] || [img.getAttribute("src") || ""];
     const checked = await Promise.all(candidates.map((src) => checkImage(src)));
     const gallery = checked.filter(Boolean);
     if (gallery.length <= 1) return;
